@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xelatex --version)",
+      "Bash(GB.cpx)",
+      "Bash(python3 -c ':*)",
+      "Bash(python3)"
+    ]
+  }
+}
