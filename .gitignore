@@ -9,12 +9,27 @@
 *.synctex.gz
 *.toc
 *.xdv
+*.bcf
+*.run.xml
 
 # Local example outputs
 TempExample.pdf
 Symbol/SymbolTable.pdf
 
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
 # OS files
 Thumbs.db
 .DS_Store
 .directory
+
+# Build output directories
+build/
+dist/
+*.zip
+*.tar.gz

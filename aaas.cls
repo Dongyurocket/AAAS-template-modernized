@@ -1,7 +1,7 @@
  
 %     aaas.cls
 %     
-%     version 0.1  (2018年4月)
+%     version 0.2  (2026年4月)
 %
 %     航空学报中文版LaTeX模板（非官方）
 %     LaTeX Template (unofficial) for Acta Aeronautica et Astronautica Sinica
@@ -20,9 +20,9 @@
 %中文latax模版
 \NeedsTeXFormat{LaTeX2e}[2007/10/19]
 \ProvidesClass{aaas}
-              [2017/07/07 v0.1
+              [2026/04/13 v0.2
 The LaTeX template for Acta Aeronautica et Astronautica Sinica]
-\typeout{Document Class `aaas' v0.1 by Htallone (2018/04)}
+\typeout{Document Class `aaas' v0.2 (2026/04) - modernized fork based on Htallone/AAAS}
 
 \DeclareOption{10.5pt}{}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexart}}
@@ -42,7 +42,6 @@ The LaTeX template for Acta Aeronautica et Astronautica Sinica]
 \usepackage{indentfirst} % 中文段落首行缩进
 \usepackage{bm}          % 公式中的粗体字符(用命令\boldsymbol）
 % \usepackage{multicol}    % 正文双栏
-\usepackage{indentfirst} % 中文首段缩进
 \usepackage{abstract}    % 2栏文档，一栏摘要及关键字宏包
 \usepackage{amsthm}      % 使用定理
 \usepackage{booktabs}    % 使用表格
@@ -67,7 +66,8 @@ The LaTeX template for Acta Aeronautica et Astronautica Sinica]
 \setmainfont{Times New Roman}
 \setCJKfamilyfont{hwxingkai}{STXingkai}
 \newcommand{\hwxingkai}{\CJKfamily{hwxingkai}}
-\usepackage{xeCJK}
+% xeCJK 由 ctexart 自动加载，此处无需重复声明
+% \usepackage{xeCJK}
 % \setCJKmainfont[BoldFont=SimHei]{SimSun}
 \setCJKfamilyfont{hei}[BoldFont=SimHei,ItalicFont=KaiTi]{SimHei}
 \setCJKfamilyfont{kai}[BoldFont=SimHei]{KaiTi}
@@ -78,13 +78,8 @@ The LaTeX template for Acta Aeronautica et Astronautica Sinica]
 
 \setCJKfamilyfont{simsong}[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
 \newcommand{\simsong}{\CJKfamily{simsong}}
-\DeclareFontFamilySubstitution{OT1}{TimesNewRoman(0)}{lmr}
-\DeclareFontFamily{OT1}{TimesNewRoman(0)}{}
-\DeclareFontShape{OT1}{TimesNewRoman(0)}{m}{n}{<->ssub * lmr/m/n}{}
-\DeclareFontShape{OT1}{TimesNewRoman(0)}{m}{it}{<->ssub * lmr/m/it}{}
-\DeclareFontShape{OT1}{TimesNewRoman(0)}{b}{n}{<->ssub * lmr/b/n}{}
-\DeclareFontShape{OT1}{TimesNewRoman(0)}{b}{it}{<->ssub * lmr/b/it}{}
-  
+% OT1/TimesNewRoman(0) 字体回退由 OT1TimesNewRoman(0).fd 处理，此处无需重复声明
+
 \newfontfamily\CalibriFont{Calibri}
 \newfontfamily\TimesNMFont{Times New Roman}
 \newfontfamily\ArialFont{Arial}
@@ -116,14 +111,25 @@ The LaTeX template for Acta Aeronautica et Astronautica Sinica]
 %  lengths
 %    下面的命令重定义页面边距，使其符合中文刊物习惯。
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{lettrine}
+% 页面尺寸（单位：mm），便于后续统一调整
+\newlength{\aaasTopMargin}    \setlength{\aaasTopMargin}{33.5mm}
+\newlength{\aaasBottomMargin} \setlength{\aaasBottomMargin}{31.5mm}
+\newlength{\aaasLeftMargin}   \setlength{\aaasLeftMargin}{22mm}
+\newlength{\aaasRightMargin}  \setlength{\aaasRightMargin}{22mm}
+\newlength{\aaasHeadSep}     \setlength{\aaasHeadSep}{5mm}
+\newlength{\aaasHeadHeight}   \setlength{\aaasHeadHeight}{13mm}
+\newlength{\aaasFootSkip}     \setlength{\aaasFootSkip}{10mm}
+
 \setlength{\parindent}{2em}
 \setlength{\voffset}{-4mm}
 \setlength{\parskip}{1pt} 
 \vbadness=10000
 % \setlength{\arraycolsep}{1pt}
 \renewcommand{\baselinestretch}{1.11} %定义行间距1.15
-\setcounter{page}{1} \makeatletter
+\setcounter{page}{1}
+
+%% 节标题格式及编号字体（合并为一个 makeatletter 块）
+\makeatletter
 \renewcommand\section{\@startsection {section}{1}{\z@}%
                                    {1.5ex }%
                                    {1.5ex}%
@@ -136,44 +142,40 @@ The LaTeX template for Acta Aeronautica et Astronautica Sinica]
                                    {-1pt }%
                                    {1pt}%
                                    {\normalfont\wuhao}}
- \renewcommand{\CJKglue}{\hskip -0.4pt plus 5.5\baselineskip}
- 
- 
-%% 节编号字体为\normalfont，取消黑体
-\makeatletter  % see, e.g., p. 26 of "The LaTeX Companion"
-  \def\@seccntformat#1{\@ifundefined{#1@cntformat}%
-     {\csname the#1\endcsname\quad}%   default setting
-     {\csname #1@cntformat\endcsname}% individual control
-  }
-  \def\section@cntformat{\normalfont{\thesection}\quad}
-\makeatother
-\makeatletter  % see, e.g., p. 26 of "The LaTeX Companion"
-  \def\@subseccntformat#1{\@ifundefined{#1@cntformat}%
-     {\csname the#1\endcsname\quad}%   default setting
-     {\csname #1@cntformat\endcsname}% individual control
-  }
-  \def\subsection@cntformat{\normalfont{\thesubsection}\quad}
-\makeatother
-\makeatletter  % see, e.g., p. 26 of "The LaTeX Companion"
-  \def\@subsubseccntformat#1{\@ifundefined{#1@cntformat}%
-     {\csname the#1\endcsname\quad}%   default setting
-     {\csname #1@cntformat\endcsname}% individual control
-  }
-  \def\subsubsection@cntformat{\normalfont{\thesubsubsection}\quad}
-\makeatother
- 
- \usepackage{geometry}
- \newgeometry{
-    top=33.5mm, bottom=31.5mm, left=22mm, right=22mm,
-    headsep=5mm, headheight=13mm, footskip=10mm,
+\renewcommand{\CJKglue}{\hskip -0.4pt plus 5.5\baselineskip}
+
+%% 节编号字体为 \normalfont，取消黑体
+\def\@seccntformat#1{\@ifundefined{#1@cntformat}%
+   {\csname the#1\endcsname\quad}%
+   {\csname #1@cntformat\endcsname}%
 }
-\savegeometry{mastergeometry}
-\loadgeometry{mastergeometry}
+\def\section@cntformat{\normalfont{\thesection}\quad}
+
+\def\@subseccntformat#1{\@ifundefined{#1@cntformat}%
+   {\csname the#1\endcsname\quad}%
+   {\csname #1@cntformat\endcsname}%
+}
+\def\subsection@cntformat{\normalfont{\thesubsection}\quad}
+
+\def\@subsubseccntformat#1{\@ifundefined{#1@cntformat}%
+   {\csname the#1\endcsname\quad}%
+   {\csname #1@cntformat\endcsname}%
+}
+\def\subsubsection@cntformat{\normalfont{\thesubsubsection}\quad}
+\makeatother
+
+\usepackage{geometry}
+\newgeometry{
+   top=\aaasTopMargin, bottom=\aaasBottomMargin,
+   left=\aaasLeftMargin, right=\aaasRightMargin,
+   headsep=\aaasHeadSep, headheight=\aaasHeadHeight,
+   footskip=\aaasFootSkip,
+}
 
 \setlength{\columnsep}{9mm}
- 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setlength{\parskip}{1pt} \allowdisplaybreaks \makeatother
+\setlength{\parskip}{1pt} \allowdisplaybreaks
 \newtheoremstyle{mystyle}{3pt}{3pt}{}{\parindent}{\bfseries}{}{5mm}{}
 \theoremstyle{mystyle}
 \newtheorem{Cor}{\normalsize{{\CJKfamily{hei}推论}}}

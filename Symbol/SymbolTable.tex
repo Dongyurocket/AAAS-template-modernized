@@ -43,6 +43,9 @@
 \newcommand{\myxiaoliuhao}{\fontsize{6.5pt}{\baselineskip}\selectfont}  % 字号设置
 \newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % 字号设置
   
+% tabu / longtabu 在 LaTeX 2020+ 内核下有兼容性问题
+% 如遇编译错误，可替换为 xltabular 或手动使用 longtable + array
+% 此文件为独立辅助示例，非投稿必需
 \usepackage{tabu}
 \usepackage{longtable}
 \usepackage{makecell}
