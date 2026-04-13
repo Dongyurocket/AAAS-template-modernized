@@ -1,0 +1,20 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.xdv
+
+# Local example outputs
+TempExample.pdf
+Symbol/SymbolTable.pdf
+
+# OS files
+Thumbs.db
+.DS_Store
+.directory

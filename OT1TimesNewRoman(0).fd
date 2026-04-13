@@ -1,0 +1,7 @@
+\ProvidesFile{OT1TimesNewRoman(0).fd}[2026/04/13 Local fallback for OT1 TimesNewRoman(0)]
+\DeclareFontFamily{OT1}{TimesNewRoman(0)}{}
+\DeclareFontShape{OT1}{TimesNewRoman(0)}{m}{n}{<->ssub * lmr/m/n}{}
+\DeclareFontShape{OT1}{TimesNewRoman(0)}{m}{it}{<->ssub * lmr/m/it}{}
+\DeclareFontShape{OT1}{TimesNewRoman(0)}{b}{n}{<->ssub * lmr/b/n}{}
+\DeclareFontShape{OT1}{TimesNewRoman(0)}{b}{it}{<->ssub * lmr/b/it}{}
+\endinput
